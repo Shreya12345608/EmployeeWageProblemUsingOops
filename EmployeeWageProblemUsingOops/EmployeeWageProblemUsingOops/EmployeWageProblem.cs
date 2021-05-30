@@ -10,16 +10,19 @@ namespace EmployeeWageProblemUsingOops
     {
         const int Emp_Full_Time = 1;
         const int Emp_Part_Time = 2;
-        public int Working_Days_Per_Month = 20;
-        public int Total_Salary_Month = 0;
-        public int Day;
+        public int Count_Work_Day = 20;
+        public int Emp_Per_Rate_Hour = 20;
+        public int MAx_Hrs_Or_Day_Month= 100;
+        public int Working_Days = 0;
         public int empHrs = 0;
-        public int EmployeeWage;
+        public int EmployeeWage = 0;
+        public int EmpSalary;
         public void Attendance()
         {
-            // Stroing RandomValue
-            for (Day = 1; Day <= Working_Days_Per_Month; Day++)
+            // Storing RandomValue
+            while (empHrs <= MAx_Hrs_Or_Day_Month && Working_Days < Count_Work_Day)  // 0<=100 && 0<20
             {
+                Working_Days++; // +1
                 Random random = new Random(); //Random Value
                 int empCheck = random.Next(0, 3); //Check Random in b/w 0 to 3
                 switch (empCheck) // switch Case
@@ -36,10 +39,11 @@ namespace EmployeeWageProblemUsingOops
                         empHrs = 0; //Default 0
                         break;
                 }
+                EmployeeWage += empHrs; // EmployeeWage = EmployeeWage+ empHrs
+                Console.WriteLine("Day#:" + Working_Days + "Employee Hrs:" + empHrs);
             }
             //calculating 
-            EmployeeWage = empHrs * Working_Days_Per_Month;
-            Total_Salary_Month += EmployeeWage;  // Total_Salary_Month = Total_Salary_Month + EmployeeWage
+            EmpSalary = EmployeeWage + Emp_Per_Rate_Hour; // EmpSalary = EmployeeWage + Emp_Per_Rate_Hour
             Console.WriteLine("Employee Wage : " + EmployeeWage); // op
         }
     }
