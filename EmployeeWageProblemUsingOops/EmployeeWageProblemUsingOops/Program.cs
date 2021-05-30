@@ -11,6 +11,7 @@ namespace EmployeeWageProblemUsingOops
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Employee Wage Computation Program");
+            //Emp is Present Or Absent
             EmployeWageProblem EmployeeWage = new EmployeWageProblem();
             EmployeeWage.Attendance();
             Console.ReadKey();
