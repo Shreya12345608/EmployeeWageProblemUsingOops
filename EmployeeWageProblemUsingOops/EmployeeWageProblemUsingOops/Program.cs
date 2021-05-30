@@ -10,7 +10,10 @@ namespace EmployeeWageProblemUsingOops
     {
         static void Main(string[] args)
         {
-            System.out.println("Welcome to Employee Wage Computation Program");
+            Console.WriteLine("Welcome to Employee Wage Computation Program");
+            EmployeWageProblem EmployeeWage = new EmployeWageProblem();
+            EmployeeWage.Attendance();
+            Console.ReadKey();
         }
     }
 }
