@@ -10,29 +10,28 @@ namespace EmployeeWageProblemUsingOops
     {
         public int IS_PRESENT = 1;
         public int Wage_Per_Hours = 20;
-        public int Full_Day_Hour = 8;
+        // public int Full_Day_Hour = 8;
+        readonly int Emp_Full_Time = 2;
+        readonly int Emp_Part_Time = 1;
+        public int empHrs;
         public int EmployeeWage;
         public void Attendance()
         {
             // Stroing RandomValue
             Random random = new Random();
             int empCheck = random.Next(0, 2); //checking Random Value in b/w 0 to 2
-            if (empCheck == IS_PRESENT) // if  Is_Present = 1
+            if (empCheck == Emp_Part_Time) //check if 1 == 1 
             {
-                Console.WriteLine("Employee is Present"); //Emp is Present
-                CalculateDailyWage(); //Calculating Emp Full wage in this function
+                Console.WriteLine("Employee is Present"); //Present
+                empHrs = 4; //* by 4
             }
-            else  //if Is_Present = 0
+            else //if Random is 2 
             {
-                Console.WriteLine("Employee is Absent"); //Emp is Absent
-                Console.WriteLine("Employee Wage is null"); // if 0 it will be null
+                Console.WriteLine("Employee is Absent"); //absent
+                empHrs = 0; // * 0
             }
-
-        }
-        //Calculation emp Full Wage
-        public void CalculateDailyWage()
-        {
-             EmployeeWage = Wage_Per_Hours * Full_Day_Hour;  // Empwage = 20*8 
+            //calculate 
+            EmployeeWage = empHrs * Wage_Per_Hours;
             Console.WriteLine("Employee Full Wage is : " + EmployeeWage); //op
         }
     }
