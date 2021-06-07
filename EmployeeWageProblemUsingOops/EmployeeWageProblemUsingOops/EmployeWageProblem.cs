@@ -1,85 +1,96 @@
-﻿using System;
+﻿using EmployeeWageProblemUsingOops;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EmployeeWageProblem
 {
-    // accessModifier class class name
-    public class EmpWageBuilderObject 
+    /// <summary>
+    /// 
+    /// </summary>
+    class EmployeWageProblem
+
     {
-        //constants
-        const int Emp_Full_Time = 1;
-        const int Emp_Part_Time = 2;
-        //properties 
-        private string CompanyName;
-        private int WagePerHour;
-        private int NumWorkingDays;
-        private int MaxHoursPerMonth;
-        private int totalWage;
-
-        // Constructor class of EmpWageBuilderObject
-        public EmpWageBuilderObject(string CompanyName, int WagePerHour, int NumWorkingDays, int MaxHoursPerMonth)
+        //variable with there value
+        public int FULL_DAY_HOUR = 8;
+        public int PART_TIME_HOUR = 4;
+        const int EMP_FULL_TIME = 1;
+        const int EMP_PART_TIME = 2;
+        // CompanyEmpWage array [] companies 
+        CompanyEmpWage[] companies;
+        int noOfCompanies;
+        //constructor of EmployeeWageProblem
+        public EmployeWageProblem()
         {
-            //Constructors
-            this.CompanyName = CompanyName;
-            this.WagePerHour = WagePerHour;
-            this.NumWorkingDays = NumWorkingDays;
-            this.MaxHoursPerMonth = MaxHoursPerMonth;
+            //storing 10 CompanyEmpWage in array
+            companies = new CompanyEmpWage[10];
+            //by default noOfCompanies =0;
+            noOfCompanies = 0;
         }
-        public void Attendance()
-        //instance method
+        //Instance method with parameters
+        public void AddCompany(string companyName, int wagePerHour, int maxWorkingDays, int maxWorkingHours)
         {
-
-            //variables
-            int DailyWage = 0;
-            int days, isPresent;
-            // int totalWage = 0;
-            int totalHours = 0;
-            //random number generation
+            //creating constructor object of CompanyEMpWage
+            CompanyEmpWage company = new CompanyEmpWage(companyName, wagePerHour, maxWorkingDays, maxWorkingHours);
+            company.setWagesPerMonth(this.ComputeMonthlyWage(company));
+            companies[noOfCompanies] = company;
+            //noofCompanies = noofCompanies +1
+            noOfCompanies++;
+        }
+        //method for add company
+        public void AddCompany(CompanyEmpWage company)
+        {
+            company.setWagesPerMonth(this.ComputeMonthlyWage(company));
+            companies[noOfCompanies] = company;
+            //noofCompanies = noofCompanies +1
+            noOfCompanies++;
+        }
+        public int ComputeMonthlyWage(CompanyEmpWage company)
+        {
+            //variable
+            int workingHours = 0;
+            int workingDays = 0;
+            int wagesPerMonth = 0;
+            int attendance;
+            int empHrs = 0;
+            // creating randoom object
             Random rand = new Random();
-            //calculating for month
-            for (days = 1; days <= this.NumWorkingDays; days++) // calculating for 20 working days
+            //checking in while 
+            while (workingHours < company.maxWorkingHours && workingDays < company.maxWorkingDays)
             {
-                isPresent = rand.Next(0, 3);
+                attendance = rand.Next(0, 3); //Check Random in b/w 0 to 3
                 //using switch case
-                switch (isPresent)
+                switch (attendance)
                 {
-                    case Emp_Full_Time: // Employee is present full time
-                        {
-                            //instance Variable Name
-                            DailyWage = this.WagePerHour * 8;
-                            break;
-                        }
-                    case Emp_Part_Time: //employee is present for part time
-                        {
-                            //instance Variable Name
-                            DailyWage = this.WagePerHour * 4;
-                            break;
-                        }
-                    default: // employee is absent
-                        {
-                            DailyWage = isPresent;
-                            break;
-                        }
-                }
-                //checking total number of hours
-                totalHours += DailyWage / 20; //calculate total hours worked
-                totalWage += DailyWage; // calculating montly wage
-                if (totalHours >= this.MaxHoursPerMonth) //maximum total hours 
-                    break;
-            }
-            //Console.WriteLine($"Montly wage is {totalWage} and working hours is {totalHours}"); // output 
-            Console.WriteLine();
-            Console.WriteLine($"Company Name :{this.CompanyName}"); // DMart
-            Console.WriteLine($"No. of hours worked :{totalHours}"); // 8
-            Console.WriteLine($"Wage Per hour :{this.WagePerHour}"); //20
-            Console.WriteLine($"Monthly wage :{this.totalWage}");//160
-        }
-        //displaying results
-        public string Result()
+                    //Emp Full Time
+                    case EMP_FULL_TIME:
+                        workingDays += 1; // workingDays = workingDays +1
+                        empHrs = FULL_DAY_HOUR;  //8 
+                        break;
+                    //Emp PArt Time
+                    case EMP_PART_TIME:
+                        workingDays += 1; // workingDays = workingDays +1
+                        empHrs = PART_TIME_HOUR; --4
+                        break;
+                    default:
+                        break;
+                }//end Switch
+                 //  workingHours = workingHours  + empHrs
+                workingHours += empHrs;
+                //wagesPerMonth + (company.wagePerHour * workingHours);
+                wagesPerMonth += (company.wagePerHour * workingHours);
+
+            }//end while
+            //return value
+            return wagesPerMonth;
+        } // end  ComputeMonthlyWage(CompanyEmpWage company)
+
+        //Adding Multiple Company using loop
+        public void DisplayCompanyWages()
         {
-            //Op Will be Total Employee wage for Comapny : DMart is 160
-            return "Total Employee wage for Comapny : " + this.CompanyName + " is " + this.totalWage;
-        }
+            for (int Display_i = 0; Display_i < noOfCompanies; Display_i++)
+                companies[Display_i].printMonthlyWage();
+         }
+
     }
 }
