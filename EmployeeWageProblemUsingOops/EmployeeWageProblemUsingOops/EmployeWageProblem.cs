@@ -5,10 +5,7 @@ using System.Text;
 
 namespace EmployeeWageProblem
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    class EmployeWageProblem
+    class EmployeWageProblem : IComputeEmpWage
 
     {
         //variable with there value
@@ -70,7 +67,7 @@ namespace EmployeeWageProblem
                     //Emp PArt Time
                     case EMP_PART_TIME:
                         workingDays += 1; // workingDays = workingDays +1
-                        empHrs = PART_TIME_HOUR; --4
+                        empHrs = PART_TIME_HOUR; //4
                         break;
                     default:
                         break;

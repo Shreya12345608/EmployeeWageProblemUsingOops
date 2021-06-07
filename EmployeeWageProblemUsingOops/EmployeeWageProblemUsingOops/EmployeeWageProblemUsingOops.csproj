@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CompanyEmpWage.cs" />
     <Compile Include="EmployeWageProblem.cs" />
+    <Compile Include="IComputeEmpWage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
