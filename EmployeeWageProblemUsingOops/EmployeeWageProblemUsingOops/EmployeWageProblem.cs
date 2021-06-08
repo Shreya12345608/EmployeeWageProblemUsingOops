@@ -16,7 +16,7 @@ namespace EmployeeWageProblem
         const int EMP_PART_TIME = 2;
         // Creating an ArrayList Class
         ArrayList companies;
-        int noOfCompanies;
+     //   int noOfCompanies;
         //constructor of EmployeeWageProblem
         public EmployeWageProblem()
         {
@@ -28,14 +28,16 @@ namespace EmployeeWageProblem
         {
             //creating constructor object of CompanyEMpWage
             CompanyEmpWage company = new CompanyEmpWage(companyName, wagePerHour, maxWorkingDays, maxWorkingHours);
+            company.setDailyWage(this.ComputeDailyWage(company));
             company.setWagesPerMonth(this.ComputeMonthlyWage(company));
             companies.Add(company);
             //noofCompanies = noofCompanies +1
-           // noOfCompanies++;
+            // noOfCompanies++;
         }
         //method for add company
         public void AddCompany(CompanyEmpWage company)
         {
+            company.setDailyWage(this.ComputeDailyWage(company));
             company.setWagesPerMonth(this.ComputeMonthlyWage(company));
             companies.Add(company);
         }
@@ -79,15 +81,34 @@ namespace EmployeeWageProblem
             //return value
             return wagesPerMonth;
         } // end  ComputeMonthlyWage(CompanyEmpWage company)
-
+        public int ComputeDailyWage(CompanyEmpWage company)
+        {
+            return FULL_DAY_HOUR * company.wagePerHour;
+        }
         //Adding Multiple Company using foreach loop
-     public void DisplayCompanyWages()
-		{
+        public void DisplayCompanyWages()
+        {
             // Displaying the elements in ArrayList
             foreach (CompanyEmpWage company in companies)
             {
-				company.printMonthlyWage();// called method from COmpanyEmpWage
+                company.printMonthlyWage();// called method from COmpanyEmpWage
             }
-		}
+        }
+       //method for display Company Total Wages
+        public void DisplayCompanyMonthlyWages()
+        {
+            foreach (CompanyEmpWage company in companies)// called method from COmpanyEmpWage
+            {
+                company.printMonthlyWage(); //calling printMonthlyWage from CompanyEmpWage using company 
+            }
+        }
+            //methoda for display Company Wages
+        public void DisplayCompanyDailyWages()
+        {
+            foreach (CompanyEmpWage company in companies)// called method from COmpanyEmpWage
+            {
+                company.printDailyWage(); //calling printDailyWage from CompanyEmpWage using company 
+            }
+        }
     }
 }
