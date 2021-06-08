@@ -1,5 +1,6 @@
 ﻿using EmployeeWageProblemUsingOops;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,16 +14,14 @@ namespace EmployeeWageProblem
         public int PART_TIME_HOUR = 4;
         const int EMP_FULL_TIME = 1;
         const int EMP_PART_TIME = 2;
-        // CompanyEmpWage array [] companies 
-        CompanyEmpWage[] companies;
+        // Creating an ArrayList Class
+        ArrayList companies;
         int noOfCompanies;
         //constructor of EmployeeWageProblem
         public EmployeWageProblem()
         {
-            //storing 10 CompanyEmpWage in array
-            companies = new CompanyEmpWage[10];
-            //by default noOfCompanies =0;
-            noOfCompanies = 0;
+            // ArrayList 
+            companies = new ArrayList();
         }
         //Instance method with parameters
         public void AddCompany(string companyName, int wagePerHour, int maxWorkingDays, int maxWorkingHours)
@@ -30,18 +29,17 @@ namespace EmployeeWageProblem
             //creating constructor object of CompanyEMpWage
             CompanyEmpWage company = new CompanyEmpWage(companyName, wagePerHour, maxWorkingDays, maxWorkingHours);
             company.setWagesPerMonth(this.ComputeMonthlyWage(company));
-            companies[noOfCompanies] = company;
+            companies.Add(company);
             //noofCompanies = noofCompanies +1
-            noOfCompanies++;
+           // noOfCompanies++;
         }
         //method for add company
         public void AddCompany(CompanyEmpWage company)
         {
             company.setWagesPerMonth(this.ComputeMonthlyWage(company));
-            companies[noOfCompanies] = company;
-            //noofCompanies = noofCompanies +1
-            noOfCompanies++;
+            companies.Add(company);
         }
+        //method for add companyMontlyWage Calculating
         public int ComputeMonthlyWage(CompanyEmpWage company)
         {
             //variable
@@ -82,12 +80,14 @@ namespace EmployeeWageProblem
             return wagesPerMonth;
         } // end  ComputeMonthlyWage(CompanyEmpWage company)
 
-        //Adding Multiple Company using loop
-        public void DisplayCompanyWages()
-        {
-            for (int Display_i = 0; Display_i < noOfCompanies; Display_i++)
-                companies[Display_i].printMonthlyWage();
-         }
-
+        //Adding Multiple Company using foreach loop
+     public void DisplayCompanyWages()
+		{
+            // Displaying the elements in ArrayList
+            foreach (CompanyEmpWage company in companies)
+            {
+				company.printMonthlyWage();// called method from COmpanyEmpWage
+            }
+		}
     }
 }
